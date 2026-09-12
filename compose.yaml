@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: 'postgres:17.11'
+    environment:
+      - 'POSTGRES_DB=${ECOMMERCE_DB}'
+      - 'POSTGRES_PASSWORD=${ECOMMERCE_DB_PASSWORD}'
+      - 'POSTGRES_USER=${ECOMMERCE_DB_USER}'
+    command: postgres -c timezone=UTC
+    ports:
+      - '5432:5432'
+  redis:
+    image: 'redis:8.10'
+    ports:
+      - '6379'

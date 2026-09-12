@@ -1,0 +1,3 @@
+rootProject.name = 'viki-ecommerce-sdk'
+
+include(":api:catalog")
