@@ -83,3 +83,6 @@ CREATE TRIGGER trigger_vendors_updated_at
     BEFORE UPDATE ON users.vendors
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
+
+ALTER TABLE catalog.products REPLICA IDENTITY FULL;
+ALTER TABLE catalog.product_variants REPLICA IDENTITY FULL;

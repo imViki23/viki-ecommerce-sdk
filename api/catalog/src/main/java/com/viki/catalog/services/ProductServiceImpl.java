@@ -5,6 +5,7 @@ import com.viki.catalog.mappers.ProductMapper;
 import com.viki.catalog.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +27,10 @@ public class ProductServiceImpl implements ProductService {
                 .map(productMapper::mapToProductDto)
                 .orElse(null);
     }
+
+    @Override
+    @CacheEvict(value = "products", key = "#productId")
+    public void evictProductCache(UUID productId) { }
+
+
 }

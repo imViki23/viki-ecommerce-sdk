@@ -6,4 +6,5 @@ import java.util.UUID;
 
 public interface ProductService {
     ProductDto getProduct(UUID productId);
+    void evictProductCache(UUID productId);
 }

@@ -13,7 +13,21 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: catalog-cache-invalidation-group
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+      properties:
+        spring.json.trusted.packages: "*"
 
 server:
   servlet:
     context-path: /catalog/
+
+caches:
+  product:
+    ttl: 600 # seconds
