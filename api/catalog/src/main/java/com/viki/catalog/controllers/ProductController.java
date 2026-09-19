@@ -1,7 +1,7 @@
 package com.viki.catalog.controllers;
 
 import com.viki.catalog.dtos.ProductDto;
-import com.viki.catalog.services.ProductService;
+import com.viki.catalog.services.ProductStockService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +16,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductStockService productStockService;
 
     @GetMapping("/v1/product/{productId}")
     public ResponseEntity<ProductDto> getProduct(@PathVariable("productId") UUID productId) {
-        log.info("Received Request: productId = {}", productId);
-        return productService.getProduct(productId)
-                .map(productDto -> {
-                    log.debug("Sending Response: {}", productDto);
-                    return ResponseEntity.ok(productDto);
-                })
-                .orElse(ResponseEntity.noContent().build());
+        ProductDto productDto = productStockService.getProduct(productId);
+        if (productDto == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productDto);
     }
 }

@@ -1,6 +1,7 @@
 services:
   postgres:
     image: 'postgres:17.11'
+    container_name: 'core'
     environment:
       - 'POSTGRES_DB=${ECOMMERCE_DB}'
       - 'POSTGRES_PASSWORD=${ECOMMERCE_DB_PASSWORD}'
@@ -11,5 +12,14 @@ services:
     ports:
       - '5432:5432'
 
+  redis:
+    image: 'redis:8.10.1'
+    container_name: 'cache'
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
 volumes:
   postgres-data:
+  redis_data:

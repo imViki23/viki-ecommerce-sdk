@@ -12,11 +12,12 @@ $$ LANGUAGE plpgsql;
 
 -- SCHEMA
 CREATE SCHEMA IF NOT EXISTS catalog;
+CREATE SCHEMA IF NOT EXISTS users;
 
 -- BRAND
 CREATE TABLE catalog.brands (
     brand_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    title TEXT NOT NULL,
+    name TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -28,11 +29,12 @@ CREATE TRIGGER trigger_brand_updated_at
 -- Products
 CREATE TABLE catalog.products (
     product_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    title TEXT NOT NULL,
+    name TEXT NOT NULL,
     slug VARCHAR(255) NOT NULL UNIQUE,
-    brand_id UUID NOT NULL REFERENCES catalog.brands(brand_id),
+    brand_id UUID NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT fk_products_brands FOREIGN KEY (brand_id) REFERENCES catalog.brands(brand_id)
 );
 CREATE TRIGGER trigger_products_updated_at
     BEFORE UPDATE ON catalog.products
@@ -40,15 +42,44 @@ CREATE TRIGGER trigger_products_updated_at
     EXECUTE FUNCTION update_updated_at_column();
 
 -- Variants
-CREATE TABLE catalog.variants (
+CREATE TABLE catalog.product_variants (
     variant_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     sku VARCHAR(100) NOT NULL UNIQUE,
-    product_id UUID NOT NULL REFERENCES catalog.products (product_id),
+    product_id UUID NOT NULL,
     attributes JSONB NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT fk_variants_products FOREIGN KEY (product_id) REFERENCES catalog.products(product_id)
+);
+CREATE TRIGGER trigger_variants_updated_at
+    BEFORE UPDATE ON catalog.product_variants
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+-- Stock
+CREATE TABLE catalog.stocks (
+    variant_id UUID NOT NULL,
+    vendor_id UUID NOT NULL,
+    quantity INT NOT NULL CHECK ( quantity >= 0 ),
+    price INT NOT NULL CHECK ( price > 0 ),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT pk_stocks PRIMARY KEY (variant_id, vendor_id)
+);
+CREATE TRIGGER trigger_stocks_updated_at
+    BEFORE UPDATE ON catalog.stocks
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+
+-- Vendors
+CREATE TABLE users.vendors (
+    vendor_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
-CREATE TRIGGER trigger_variants_updated_at
-    BEFORE UPDATE ON catalog.variants
+CREATE TRIGGER trigger_vendors_updated_at
+    BEFORE UPDATE ON users.vendors
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();

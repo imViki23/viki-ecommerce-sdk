@@ -1,10 +1,10 @@
 package com.viki.catalog.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -13,5 +13,16 @@ import java.util.UUID;
 public class ProductEntity {
 
     @Id
+    @Column(name = "product_id")
     private UUID productId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "slug")
+    private String slug;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProductVariantEntity> variants = new ArrayList<>();
+
 }

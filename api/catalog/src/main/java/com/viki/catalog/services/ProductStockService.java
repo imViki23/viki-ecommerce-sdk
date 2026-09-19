@@ -4,6 +4,6 @@ import com.viki.catalog.dtos.ProductDto;
 
 import java.util.UUID;
 
-public interface ProductService {
+public interface ProductStockService {
     ProductDto getProduct(UUID productId);
 }
