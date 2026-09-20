@@ -20,8 +20,3 @@ eureka:
       defaultZone: http://localhost:8761/eureka/ # Point to your Eureka server
   instance:
     prefer-ip-address: true # Register using IP rather than hostname (great for Docker)
-
-logging:
-  level:
-    org.springframework.cloud.gateway.server.mvc: TRACE
-    org.springframework.security: TRACE
