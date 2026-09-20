@@ -1,6 +1,6 @@
 spring:
   application:
-    name: auth
+    name: auth-service
   datasource:
     url: jdbc:postgresql://${ECOMMERCE_DB_HOST}/${ECOMMERCE_DB}
     username: ${ECOMMERCE_DB_USER}

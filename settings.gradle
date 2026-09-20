@@ -1,5 +1,5 @@
 rootProject.name = 'viki-ecommerce-sdk'
 
-include(":api:catalog")
-include(":api:common")
-include 'api:auth'
+include 'api:common'
+include 'api:auth-service'
+include 'api:catalog-service'
