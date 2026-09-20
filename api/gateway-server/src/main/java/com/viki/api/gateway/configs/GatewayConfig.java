@@ -18,7 +18,6 @@ public class GatewayConfig {
     public RouterFunction<ServerResponse> authServiceRouter() {
         return route("auth-service-route")
                 .route(path("/auth/**"), http())
-                .filter(stripPrefix(1))
                 .filter(lb("AUTH-SERVICE"))
                 .build();
     }
@@ -27,7 +26,6 @@ public class GatewayConfig {
     public RouterFunction<ServerResponse> catalogServiceRouter() {
         return route("catalog-service-route")
                 .route(path("/catalog/**"), http())
-                .filter(stripPrefix(1))
                 .filter(lb("CATALOG-SERVICE"))
                 .build();
     }
