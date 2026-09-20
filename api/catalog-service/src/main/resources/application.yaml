@@ -22,9 +22,21 @@ spring:
         spring.json.trusted.packages: "*"
 
 server:
-  servlet:
-    context-path: /catalog/
+  port: 8082
 
 caches:
   product:
     ttl: 600 # seconds
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # Point to your Eureka server
+  instance:
+    prefer-ip-address: true # Register using IP rather than hostname (great for Docker)
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

@@ -20,8 +20,8 @@ public class CatalogSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/catalog/v3/api-docs/**", "/catalog/swagger-ui/**", "/catalog/swagger-ui.html").permitAll()
-                        .requestMatchers("/catalog/actuator/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
                         .anyRequest()
                         .authenticated()
                 );
