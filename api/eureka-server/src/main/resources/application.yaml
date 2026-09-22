@@ -11,9 +11,3 @@ eureka:
     fetch-registry: false       # Don't fetch registry info (it's the source)
   server:
     wait-time-in-ms-when-sync-empty: 0
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info

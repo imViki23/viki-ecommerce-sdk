@@ -8,12 +8,6 @@ spring:
           enabled: true # Automatically turns Eureka service IDs into routes
           lower-case-service-id: true # Allows calling via lowercase
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
-
 eureka:
   client:
     service-url:
