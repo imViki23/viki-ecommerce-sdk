@@ -1,11 +1,11 @@
 info:
-  name: Login
+  name: Auth Service - Login
   type: http
   seq: 1
 
 http:
   method: POST
-  url: http://localhost:8080/auth/v1/login
+  url: http://localhost:8081/auth/v1/login
   body:
     type: json
     data: |-
@@ -20,3 +20,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

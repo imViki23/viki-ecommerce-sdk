@@ -12,3 +12,5 @@ include 'utils:gateway-server'
 include 'services:auth-service'
 include 'services:catalog-service'
 include 'services:order-service'
+
+include 'starters:security'

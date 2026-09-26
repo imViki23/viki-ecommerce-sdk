@@ -1,24 +1,4 @@
 dependencies {
-    // Security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'io.jsonwebtoken:jjwt-api'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson'
-    // JPA
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-    runtimeOnly 'org.postgresql:postgresql'
-    // Cache
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
-    // Flyway
-    implementation 'org.springframework.boot:spring-boot-starter-flyway'
-    runtimeOnly 'org.flywaydb:flyway-database-postgresql'
-    testImplementation 'org.springframework.boot:spring-boot-starter-flyway-test'
-    // Kafka
-    implementation 'org.springframework.boot:spring-boot-starter-kafka'
-    // Integration
-    implementation 'org.springframework.integration:spring-integration-core'
-    implementation 'org.springframework.integration:spring-integration-kafka'
-
+    implementation(project(":starters:datasource"))
+    implementation(project(':starters:security'))
 }

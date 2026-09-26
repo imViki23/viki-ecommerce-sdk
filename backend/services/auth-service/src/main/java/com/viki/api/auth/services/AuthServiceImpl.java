@@ -2,7 +2,7 @@ package com.viki.api.auth.services;
 
 import com.viki.api.auth.dtos.AuthRequestDto;
 import com.viki.api.auth.dtos.AuthResponseDto;
-import com.viki.api.common.utils.JwtUtils;
+import com.viki.api.security.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

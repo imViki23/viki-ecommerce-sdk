@@ -1,18 +1,9 @@
 dependencies {
-    implementation(project(':starters:common'))
-    // Security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    // JPA
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-    runtimeOnly 'org.postgresql:postgresql'
+    implementation(project(':starters:datasource'))
+    implementation(project(':starters:security'))
     // Cache
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
-    // Flyway
-    implementation 'org.springframework.boot:spring-boot-starter-flyway'
-    runtimeOnly 'org.flywaydb:flyway-database-postgresql'
-    testImplementation 'org.springframework.boot:spring-boot-starter-flyway-test'
     // Kafka
     implementation 'org.springframework.boot:spring-boot-starter-kafka'
     // Integration

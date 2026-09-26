@@ -1,4 +1,4 @@
-package com.viki.api.common.dtos;
+package com.viki.api.security.dtos;
 
 import lombok.Data;
 

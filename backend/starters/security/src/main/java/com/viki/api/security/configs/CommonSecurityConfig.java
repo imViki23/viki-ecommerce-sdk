@@ -1,6 +1,6 @@
-package com.viki.api.common.configs;
+package com.viki.api.security.configs;
 
-import com.viki.api.common.utils.JwtUtils;
+import com.viki.api.security.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

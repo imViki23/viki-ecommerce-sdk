@@ -1,0 +1,16 @@
+info:
+  name: Catalog Service - Get Product
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: http://localhost:8082/catalog/v1/product/7d2465ce-bc73-4876-bb29-1609143a3164
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true

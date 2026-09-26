@@ -4,7 +4,9 @@ TRUNCATE TABLE catalog.brands,
     catalog.product_variants,
     catalog.stocks,
     profiles.users,
-    profiles.vendors;
+    profiles.vendors,
+    orders.orders,
+    orders.order_items;
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 

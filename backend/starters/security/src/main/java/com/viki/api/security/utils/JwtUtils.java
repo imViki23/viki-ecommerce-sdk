@@ -1,4 +1,4 @@
-package com.viki.api.common.utils;
+package com.viki.api.security.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
