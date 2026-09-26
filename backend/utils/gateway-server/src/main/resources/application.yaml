@@ -7,10 +7,3 @@ spring:
         locator:
           enabled: true # Automatically turns Eureka service IDs into routes
           lower-case-service-id: true # Allows calling via lowercase
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/ # Point to your Eureka server
-  instance:
-    prefer-ip-address: true # Register using IP rather than hostname (great for Docker)

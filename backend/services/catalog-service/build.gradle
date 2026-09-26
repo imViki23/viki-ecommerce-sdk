@@ -1,6 +1,7 @@
 dependencies {
     implementation(project(':starters:datasource'))
     implementation(project(':starters:security'))
+    implementation(project(':starters:servicediscovery'))
     // Cache
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
@@ -9,7 +10,5 @@ dependencies {
     // Integration
     implementation 'org.springframework.integration:spring-integration-core'
     implementation 'org.springframework.integration:spring-integration-kafka'
-    // Eureka
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 }
 
