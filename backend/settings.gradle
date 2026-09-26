@@ -1,6 +1,10 @@
 rootProject.name = 'viki-ecommerce-sdk'
 
+include 'bom'
+
 include 'starters:common'
+include 'starters:pubsub'
+include 'starters:datasource'
 
 include 'utils:eureka-server'
 include 'utils:gateway-server'

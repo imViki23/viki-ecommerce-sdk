@@ -1,14 +1,9 @@
-ext {
-    set('springCloudVersion', "2025.1.3")
-}
-
 dependencies {
-    implementation(project(':starters:common'))
     // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+    implementation 'io.jsonwebtoken:jjwt-api'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson'
     // JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
@@ -25,14 +20,5 @@ dependencies {
     // Integration
     implementation 'org.springframework.integration:spring-integration-core'
     implementation 'org.springframework.integration:spring-integration-kafka'
-    // Eureka
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
 }

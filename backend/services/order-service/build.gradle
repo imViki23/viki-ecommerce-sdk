@@ -1,35 +1,14 @@
-ext {
-    set('springCloudVersion', "2025.1.3")
-}
-
 dependencies {
-    implementation(project(':starters:common'))
+    // Starters
+    implementation(project(':starters:pubsub'))
     // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     // JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
     runtimeOnly 'org.postgresql:postgresql'
-    // Cache
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
     // Flyway
     implementation 'org.springframework.boot:spring-boot-starter-flyway'
     runtimeOnly 'org.flywaydb:flyway-database-postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-flyway-test'
-    // Kafka
-    implementation 'org.springframework.boot:spring-boot-starter-kafka'
-    // Integration
-    implementation 'org.springframework.integration:spring-integration-core'
-    implementation 'org.springframework.integration:spring-integration-kafka'
-    // Eureka
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
 }

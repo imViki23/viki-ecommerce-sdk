@@ -1,0 +1,6 @@
+dependencies {
+    // Common
+    implementation(project(':starters:common'))
+    // Kafka
+    implementation 'org.springframework.boot:spring-boot-starter-kafka'
+}
