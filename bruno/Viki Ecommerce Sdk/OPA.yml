@@ -1,0 +1,32 @@
+info:
+  name: OPA
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://127.0.0.1:8181/v1/data/authz/allow
+  body:
+    type: json
+    data: |-
+      {
+        "input": {
+          "method": "GET",
+          "path": [
+            "catalog",
+            "v1",
+            "product",
+            "7d2465ce-bc73-4876-bb29-1609143a3164"
+          ],
+          "roles": [
+            "ADMIN"
+          ]
+        }
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

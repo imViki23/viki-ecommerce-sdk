@@ -1,5 +1,7 @@
 dependencies {
     implementation(project(':starters:common'))
+    // OpenFeign
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
     // Web MVC
     api 'org.springframework.boot:spring-boot-starter-webmvc'
     // Security

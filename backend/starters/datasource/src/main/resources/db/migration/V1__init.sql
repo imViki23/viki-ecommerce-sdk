@@ -72,6 +72,47 @@ CREATE TRIGGER trigger_stocks_updated_at
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
 
+-- Roles
+CREATE TABLE profiles.roles (
+    role_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+CREATE TRIGGER trigger_roles_updated_at
+    BEFORE UPDATE ON profiles.roles
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+-- Permissions
+CREATE TABLE profiles.permissions (
+    permission_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+CREATE TRIGGER trigger_permissions_updated_at
+    BEFORE UPDATE ON profiles.permissions
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+-- Role-Permission Mapping
+CREATE TABLE profiles.role_permissions (
+    role_id UUID NOT NULL,
+    permission_id UUID NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT pk_role_permissions PRIMARY KEY (role_id, permission_id),
+    CONSTRAINT fk_role_permissions_roles FOREIGN KEY (role_id) REFERENCES profiles.roles(role_id),
+    CONSTRAINT fk_role_permissions_permissions FOREIGN KEY (permission_id) REFERENCES profiles.permissions(permission_id)
+);
+CREATE TRIGGER trigger_role_permissions_updated_at
+    BEFORE UPDATE ON profiles.role_permissions
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
 -- Users
 CREATE TABLE profiles.users (
     user_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -136,3 +177,4 @@ CREATE TRIGGER trigger_order_items_updated_at
 
 ALTER TABLE catalog.products REPLICA IDENTITY FULL;
 ALTER TABLE catalog.product_variants REPLICA IDENTITY FULL;
+ALTER TABLE orders.orders REPLICA IDENTITY FULL;

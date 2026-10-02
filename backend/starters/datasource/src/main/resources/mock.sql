@@ -5,14 +5,39 @@ TRUNCATE TABLE catalog.brands,
     catalog.stocks,
     profiles.users,
     profiles.vendors,
+    profiles.roles,
+    profiles.permissions,
+    profiles.role_permissions,
     orders.orders,
     orders.order_items;
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+-- Roles
+INSERT INTO profiles.roles (role_id, name, description) VALUES
+('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', 'ADMIN', 'Administrator role with full access'),
+('4a382935-4ce2-43eb-aaf3-7b452728886c', 'USER', 'Regular user role with limited access');
+
+-- Permissions
+INSERT INTO profiles.permissions (permission_id, name, description) VALUES
+('1827d735-3db2-4a6b-9515-c4d1df422dcc', 'CREATE_PRODUCT', 'Permission to create products'),
+('60a845c3-7231-4d1a-b5fc-476dddeaf2c8', 'UPDATE_PRODUCT', 'Permission to update products'),
+('81dadd3b-ac43-477c-a623-0716583b3de2', 'DELETE_PRODUCT', 'Permission to delete products'),
+('6e2f7d44-3405-447e-95d2-cc744cd6a1a4', 'VIEW_PRODUCT', 'Permission to view products');
+
+-- Role-Permission Mapping
+INSERT INTO profiles.role_permissions (role_id, permission_id) VALUES
+('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', '1827d735-3db2-4a6b-9515-c4d1df422dcc'),  -- ADMIN -> CREATE_PRODUCT
+('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', '60a845c3-7231-4d1a-b5fc-476dddeaf2c8'),  -- ADMIN -> UPDATE_PRODUCT
+('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', '81dadd3b-ac43-477c-a623-0716583b3de2'),  -- ADMIN -> DELETE_PRODUCT
+('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', '6e2f7d44-3405-447e-95d2-cc744cd6a1a4'),  -- ADMIN -> VIEW_PRODUCT
+('4a382935-4ce2-43eb-aaf3-7b452728886c', '6e2f7d44-3405-447e-95d2-cc744cd6a1a4');  -- USER -> VIEW_PRODUCT
+
+
 -- Users
-INSERT INTO profiles.users (name, email, password, role)
-VALUES ('imviki', 'imviki@sdk.com', crypt('imviki@123', gen_salt('bf', 10)), 'USER');
+INSERT INTO profiles.users (name, email, password, role) VALUES
+('imviki', 'imviki@sdk.com', crypt('Test@123', gen_salt('bf', 10)), 'USER'),
+('admin', 'admin@sdk.com', crypt('Test@123', gen_salt('bf', 10)), 'ADMIN');
 
 -- Vendors
 INSERT INTO profiles.vendors (vendor_id, name) VALUES

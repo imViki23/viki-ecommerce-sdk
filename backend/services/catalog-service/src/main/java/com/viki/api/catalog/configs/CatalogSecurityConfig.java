@@ -1,6 +1,8 @@
 package com.viki.api.catalog.configs;
 
-import com.viki.api.security.configs.JwtAuthenticationFilter;
+import com.viki.api.security.filters.AppAuthorizationFilter;
+import com.viki.api.security.services.OpaAuthorizationService;
+import com.viki.api.security.utils.JwtUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -15,7 +17,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class CatalogSecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public AppAuthorizationFilter appAuthorizationFilter(OpaAuthorizationService opaAuthorizationService, JwtUtils jwtUtils) {
+        return new AppAuthorizationFilter(opaAuthorizationService, jwtUtils);
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http, AppAuthorizationFilter appAuthorizationFilter) {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
@@ -24,7 +31,7 @@ public class CatalogSecurityConfig {
                         .anyRequest()
                         .authenticated()
                 );
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(appAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
