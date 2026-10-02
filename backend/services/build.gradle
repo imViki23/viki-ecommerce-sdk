@@ -27,7 +27,6 @@ subprojects {
         testAnnotationProcessor 'org.projectlombok:lombok'
         // tools
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
-        developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
         // Eureka
         implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         // test core

@@ -1,4 +1,4 @@
-package com.viki.api.configs;
+package com.viki.api.pubsub.configs;
 
 import com.viki.api.common.configs.YamlPropertySourceFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

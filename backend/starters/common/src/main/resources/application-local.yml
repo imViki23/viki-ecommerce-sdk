@@ -3,3 +3,13 @@ spring:
     init:
       mode: always
       data-locations: classpath:mock.sql
+  cloud:
+    discovery:
+      enabled: false
+
+
+eureka:
+  client:
+    enabled: false
+  instance:
+    enabled: false
