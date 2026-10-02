@@ -85,46 +85,38 @@ CREATE TRIGGER trigger_roles_updated_at
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
 
--- Permissions
-CREATE TABLE profiles.permissions (
-    permission_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    name VARCHAR(255) NOT NULL UNIQUE,
-    description TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-CREATE TRIGGER trigger_permissions_updated_at
-    BEFORE UPDATE ON profiles.permissions
-    FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();
-
--- Role-Permission Mapping
-CREATE TABLE profiles.role_permissions (
-    role_id UUID NOT NULL,
-    permission_id UUID NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    CONSTRAINT pk_role_permissions PRIMARY KEY (role_id, permission_id),
-    CONSTRAINT fk_role_permissions_roles FOREIGN KEY (role_id) REFERENCES profiles.roles(role_id),
-    CONSTRAINT fk_role_permissions_permissions FOREIGN KEY (permission_id) REFERENCES profiles.permissions(permission_id)
-);
-CREATE TRIGGER trigger_role_permissions_updated_at
-    BEFORE UPDATE ON profiles.role_permissions
-    FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();
-
 -- Users
 CREATE TABLE profiles.users (
     user_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name TEXT NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password TEXT NOT NULL,
-    role VARCHAR(255) NOT NULL,
+    role_id UUID NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT fk_users_roles FOREIGN KEY (role_id) REFERENCES profiles.roles(role_id)
 );
 CREATE TRIGGER trigger_users_updated_at
     BEFORE UPDATE ON profiles.users
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+-- Address
+CREATE TABLE profiles.addresses (
+    address_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    address_line_1 TEXT NOT NULL,
+    address_line_2 TEXT NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    province VARCHAR(255) NOT NULL,
+    postal_code VARCHAR(20) NOT NULL,
+    country_code VARCHAR(2) NOT NULL,
+    user_id UUID NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT fk_addresses_users FOREIGN KEY (user_id) REFERENCES profiles.users(user_id)
+);
+CREATE TRIGGER trigger_addresses_updated_at
+    BEFORE UPDATE ON profiles.addresses
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
 

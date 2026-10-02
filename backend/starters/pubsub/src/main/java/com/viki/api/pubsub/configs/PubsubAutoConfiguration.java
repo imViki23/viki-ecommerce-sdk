@@ -5,6 +5,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 
 @AutoConfiguration
-@PropertySource(value = "classpath:application-pubsub.yaml", factory = YamlPropertySourceFactory.class)
+@PropertySource(value = "classpath:application-pubsub.yml", factory = YamlPropertySourceFactory.class)
 public class PubsubAutoConfiguration {
 }

@@ -4,10 +4,9 @@ TRUNCATE TABLE catalog.brands,
     catalog.product_variants,
     catalog.stocks,
     profiles.users,
+    profiles.addresses,
     profiles.vendors,
     profiles.roles,
-    profiles.permissions,
-    profiles.role_permissions,
     orders.orders,
     orders.order_items;
 
@@ -18,26 +17,14 @@ INSERT INTO profiles.roles (role_id, name, description) VALUES
 ('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', 'ADMIN', 'Administrator role with full access'),
 ('4a382935-4ce2-43eb-aaf3-7b452728886c', 'USER', 'Regular user role with limited access');
 
--- Permissions
-INSERT INTO profiles.permissions (permission_id, name, description) VALUES
-('1827d735-3db2-4a6b-9515-c4d1df422dcc', 'CREATE_PRODUCT', 'Permission to create products'),
-('60a845c3-7231-4d1a-b5fc-476dddeaf2c8', 'UPDATE_PRODUCT', 'Permission to update products'),
-('81dadd3b-ac43-477c-a623-0716583b3de2', 'DELETE_PRODUCT', 'Permission to delete products'),
-('6e2f7d44-3405-447e-95d2-cc744cd6a1a4', 'VIEW_PRODUCT', 'Permission to view products');
-
--- Role-Permission Mapping
-INSERT INTO profiles.role_permissions (role_id, permission_id) VALUES
-('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', '1827d735-3db2-4a6b-9515-c4d1df422dcc'),  -- ADMIN -> CREATE_PRODUCT
-('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', '60a845c3-7231-4d1a-b5fc-476dddeaf2c8'),  -- ADMIN -> UPDATE_PRODUCT
-('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', '81dadd3b-ac43-477c-a623-0716583b3de2'),  -- ADMIN -> DELETE_PRODUCT
-('9d3349bc-7c58-41aa-88fa-88cac3fe5f59', '6e2f7d44-3405-447e-95d2-cc744cd6a1a4'),  -- ADMIN -> VIEW_PRODUCT
-('4a382935-4ce2-43eb-aaf3-7b452728886c', '6e2f7d44-3405-447e-95d2-cc744cd6a1a4');  -- USER -> VIEW_PRODUCT
-
-
 -- Users
-INSERT INTO profiles.users (name, email, password, role) VALUES
-('imviki', 'imviki@sdk.com', crypt('Test@123', gen_salt('bf', 10)), 'USER'),
-('admin', 'admin@sdk.com', crypt('Test@123', gen_salt('bf', 10)), 'ADMIN');
+INSERT INTO profiles.users (user_id, name, email, password, role_id) VALUES
+('179e0d45-bcbd-40aa-8155-980baa638737', 'imviki', 'imviki@sdk.com', crypt('Test@123', gen_salt('bf', 10)), '4a382935-4ce2-43eb-aaf3-7b452728886c'),
+('8a15a7ee-12c6-4c75-a2ea-c233ceb0e934', 'admin', 'admin@sdk.com', crypt('Test@123', gen_salt('bf', 10)), '9d3349bc-7c58-41aa-88fa-88cac3fe5f59');
+
+-- Address
+INSERT INTO profiles.addresses (address_id, address_line_1, address_line_2, city, province, postal_code, country_code, user_id) VALUES
+('1a06da2e-ac04-4002-9b4f-20beb68772b2', 'Apt 4B, ABC Building', 'Pakkam Street', 'Chennai', 'TamilNadu', '666666', 'IN', '179e0d45-bcbd-40aa-8155-980baa638737');
 
 -- Vendors
 INSERT INTO profiles.vendors (vendor_id, name) VALUES

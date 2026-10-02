@@ -1,15 +1,11 @@
 dependencies {
     // Starters
+    implementation(project(':starters:datasource'))
     implementation(project(':starters:pubsub'))
     implementation(project(':starters:servicediscovery'))
     // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    // JPA
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // JPA tests
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-    runtimeOnly 'org.postgresql:postgresql'
-    // Flyway
-    implementation 'org.springframework.boot:spring-boot-starter-flyway'
-    runtimeOnly 'org.flywaydb:flyway-database-postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-flyway-test'
 }
