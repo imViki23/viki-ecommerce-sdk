@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:8082/catalog/v1/product/7d2465ce-bc73-4876-bb29-1609143a3164
+  url: http://localhost:8080/catalog/v1/product/7d2465ce-bc73-4876-bb29-1609143a3164
   auth: inherit
 
 settings:

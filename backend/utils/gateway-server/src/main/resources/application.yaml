@@ -6,4 +6,7 @@ spring:
       discovery:
         locator:
           enabled: true # Automatically turns Eureka service IDs into routes
-          lower-case-service-id: true # Allows calling via lowercase
+          lower-case-service-id: true # Allows calling via lowercase\
+
+server:
+  port: 8080
