@@ -1,0 +1,7 @@
+spring:
+  temporal:
+    connection:
+      target: ${TEMPORAL_TARGET}
+    namespace: ${TEMPORAL_NAMESPACE}
+    workers-auto-discovery:
+      packages: com.viki.api

@@ -5,6 +5,7 @@ import com.viki.api.orders.entities.OrderEntity;
 import com.viki.api.orders.entities.OrderItemEntity;
 import com.viki.api.orders.repositories.OrderRepository;
 import com.viki.api.security.utils.SecurityUtils;
+import io.temporal.spring.boot.ActivityImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
+@ActivityImpl(taskQueues = "OrderTaskQueue")
 public class OrderActivitiesImpl implements OrderActivities {
 
     private final OrderRepository orderRepository;
