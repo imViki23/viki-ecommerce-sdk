@@ -137,11 +137,11 @@ CREATE TABLE orders.orders (
     order_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT 'pending', -- e.g., pending, paid, shipped, cancelled, completed
-    total_amount INT NOT NULL CHECK (total_amount >= 0), -- Stored in the smallest currency unit (e.g., cents/paise)
-    shipping_address JSONB NOT NULL,
+    address_id UUID NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    CONSTRAINT fk_orders_users FOREIGN KEY (user_id) REFERENCES profiles.users(user_id)
+    CONSTRAINT fk_orders_users FOREIGN KEY (user_id) REFERENCES profiles.users(user_id),
+    CONSTRAINT fk_orders_addresses FOREIGN KEY (address_id) REFERENCES profiles.addresses(address_id)
 );
 CREATE TRIGGER trigger_orders_updated_at
     BEFORE UPDATE ON orders.orders

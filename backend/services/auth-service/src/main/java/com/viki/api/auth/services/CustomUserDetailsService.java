@@ -22,9 +22,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByEmailId(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().toString());
         return new User(
-                user.getEmailId(),
+                user.getUserId().toString(),
                 user.getPassword(),
                 true,
                 true, true, true,

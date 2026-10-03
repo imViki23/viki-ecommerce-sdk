@@ -25,6 +25,6 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
-    private String role;
+    @Column(name = "role_id")
+    private UUID role;
 }

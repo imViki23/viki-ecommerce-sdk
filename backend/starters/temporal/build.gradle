@@ -1,0 +1,4 @@
+dependencies {
+    // Temporal
+    api('io.temporal:temporal-spring-boot-starter')
+}

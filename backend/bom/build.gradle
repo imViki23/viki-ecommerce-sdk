@@ -25,5 +25,7 @@ dependencies {
         api 'org.mapstruct:mapstruct:1.6.3'
         api 'org.mapstruct:mapstruct-processor:1.6.3'
         api 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+        api 'io.temporal:temporal-spring-boot-starter:1.31.0'
     }
 }

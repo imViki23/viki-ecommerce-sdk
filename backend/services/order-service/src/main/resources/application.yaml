@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: order-service
+  temporal:
+    connection:
+      target: 127.0.0.1:7233
+    namespace: default
+    workers:
+      - task-queue: OrderTaskQueue
+        workflow-classes:
+          - com.viki.api.orders.workflows.OrderWorkflowImpl
+        activity-beans:
+          - orderActivitiesImpl
+#    workers-auto-discovery:
+#      packages: com.viki.api
+
+server:
+  port: 8084
+  servlet:
+    context-path: /orders/

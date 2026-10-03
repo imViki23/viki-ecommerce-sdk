@@ -38,13 +38,13 @@ public class AppAuthorizationFilter extends OncePerRequestFilter {
         }
 
         String role = jwtUtils.getRoleFromJwtToken(jwt);
-        String emailId = jwtUtils.getEmailFromJwtToken(jwt);
+        String sub = jwtUtils.getSubjectFromJwtToken(jwt);
         String method = request.getMethod();
         String path = request.getRequestURI();
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
 
         // Set the authentication in the SecurityContext
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(emailId, null, authorities);
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(sub, null, authorities);
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

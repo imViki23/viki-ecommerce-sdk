@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 public class OrderDto {
     private UUID addressId;
-    private List<OrderItemsDto> items;    
+    private List<OrderItemsDto> items;
 }

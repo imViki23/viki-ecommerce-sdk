@@ -41,7 +41,7 @@ public class JwtUtils {
                 .compact();
     }
 
-    public String getEmailFromJwtToken(String token) {
+    public String getSubjectFromJwtToken(String token) {
         Claims claims = Jwts.parser()
                 .verifyWith(getSigningKey())
                 .build()

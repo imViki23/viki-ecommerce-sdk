@@ -1,0 +1,29 @@
+info:
+  name: Order - Create
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8084/orders/v1/order
+  body:
+    type: json
+    data: |-
+      {
+        "addressId": "1a06da2e-ac04-4002-9b4f-20beb68772b2",
+        "items": [
+          {
+            "variantId": "1a9cafa3-912f-4478-a28c-47350fb0ebc0",
+            "vendorId": "3c7c468d-0382-4ca3-81fb-fe7d7a863b1f",
+            "quantity": 5
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
