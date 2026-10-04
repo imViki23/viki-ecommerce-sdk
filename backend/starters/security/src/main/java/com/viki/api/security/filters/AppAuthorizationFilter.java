@@ -32,27 +32,30 @@ public class AppAuthorizationFilter extends OncePerRequestFilter {
 
         // JWT
         String jwt = extractJwt(request);
-        if (!jwtUtils.validateJwtToken(jwt)) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token");
-            return;
-        }
 
-        String role = jwtUtils.getRoleFromJwtToken(jwt);
-        String sub = jwtUtils.getSubjectFromJwtToken(jwt);
-        String method = request.getMethod();
-        String path = request.getRequestURI();
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
+        if (jwt != null) {
+            if (!jwtUtils.validateJwtToken(jwt)) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token");
+                return;
+            }
 
-        // Set the authentication in the SecurityContext
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(sub, null, authorities);
-        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            String role = jwtUtils.getRoleFromJwtToken(jwt);
+            String sub = jwtUtils.getSubjectFromJwtToken(jwt);
+            String method = request.getMethod();
+            String path = request.getRequestURI();
+            List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
 
-        boolean isAuthorized = opaAuthorizationService.isAuthorized(method, path, List.of(role));
+            // Set the authentication in the SecurityContext
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(sub, null, authorities);
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        if (!isAuthorized) {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied");
-            return;
+            boolean isAuthorized = opaAuthorizationService.isAuthorized(method, path, List.of(role));
+
+            if (!isAuthorized) {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied");
+                return;
+            }
         }
 
         filterChain.doFilter(request, response);
