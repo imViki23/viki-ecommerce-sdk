@@ -4,11 +4,11 @@ subprojects {
     apply plugin: 'org.springframework.boot'
 
     dependencies {
-        implementation platform(project(':bom'))
-        compileOnly platform(project(':bom'))
-        annotationProcessor platform(project(':bom'))
-        testCompileOnly platform(project(':bom'))
-        testAnnotationProcessor platform(project(':bom'))
+        implementation platform(project(':sources:bom'))
+        compileOnly platform(project(':sources:bom'))
+        annotationProcessor platform(project(':sources:bom'))
+        testCompileOnly platform(project(':sources:bom'))
+        testAnnotationProcessor platform(project(':sources:bom'))
         // Starter
         implementation 'org.springframework.boot:spring-boot-starter'
         // lombok

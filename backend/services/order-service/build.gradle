@@ -1,8 +1,0 @@
-dependencies {
-    // Starters
-    implementation(project(':starters:datasource'))
-    implementation(project(':starters:security'))
-    implementation(project(':starters:pubsub'))
-    implementation(project(':starters:servicediscovery'))
-    implementation(project(':starters:temporal'))
-}

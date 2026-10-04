@@ -1,0 +1,8 @@
+dependencies {
+    // Starters
+    implementation(project(':sources:starters:datasource'))
+    implementation(project(':sources:starters:security'))
+    implementation(project(':sources:starters:pubsub'))
+    implementation(project(':sources:starters:servicediscovery'))
+    implementation(project(':sources:starters:temporal'))
+}
