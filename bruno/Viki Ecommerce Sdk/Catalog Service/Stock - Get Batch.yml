@@ -1,0 +1,29 @@
+info:
+  name: Stock - Get Batch
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:8082/catalog/v1/stocks/batch
+  body:
+    type: json
+    data: |-
+      [
+        {
+          "vendorId": "3c7c468d-0382-4ca3-81fb-fe7d7a863b1f",
+          "variantId": "1a9cafa3-912f-4478-a28c-47350fb0ebc0"
+        },
+        {
+          "vendorId": "a4a41a6f-1827-4f7c-a84c-4a61dfe5b802",
+          "variantId": "9b7e6718-1e96-4a93-9f6a-cf3014127331"
+        }
+      ]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: catalog-service
+  kafka:
+    consumer:
+      group-id: catalog-cache-invalidation-group
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+      properties:
+        spring.json.trusted.packages: "*"
+
+server:
+  port: 8082
+  servlet:
+    context-path: /catalog/
+
+caches:
+  product:
+    ttl: 600 # seconds

@@ -1,0 +1,5 @@
+spring:
+  data:
+    redis:
+      host: ${CACHE_HOST}
+      port: ${CACHE_PORT}
