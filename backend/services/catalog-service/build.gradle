@@ -1,0 +1,11 @@
+dependencies {
+    implementation(project(':starters:datasource'))
+    implementation(project(':starters:security'))
+    implementation(project(':starters:servicediscovery'))
+    implementation(project(':starters:pubsub'))
+    implementation(project(':starters:cache'))
+    // Integration
+    implementation 'org.springframework.integration:spring-integration-core'
+    implementation 'org.springframework.integration:spring-integration-kafka'
+}
+

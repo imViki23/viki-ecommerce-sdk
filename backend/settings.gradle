@@ -1,0 +1,19 @@
+rootProject.name = 'viki-ecommerce-sdk'
+
+include 'bom'
+
+include 'starters:common'
+include 'starters:pubsub'
+include 'starters:datasource'
+include 'starters:security'
+include 'starters:servicediscovery'
+include 'starters:temporal'
+
+include 'services:eureka-server'
+include 'services:gateway-server'
+include 'services:auth-service'
+include 'services:catalog-service'
+include 'services:order-service'
+
+
+include 'starters:cache'

@@ -1,6 +1,6 @@
 dependencies {
     // Common
-    implementation(project(':sources:starters:common'))
+    implementation(project(':starters:common'))
     // Cache
     api 'org.springframework.boot:spring-boot-starter-data-redis'
     api 'org.springframework.boot:spring-boot-starter-cache'

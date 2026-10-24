@@ -1,6 +1,6 @@
 dependencies {
     // Common
-    implementation(project(':sources:starters:common'))
+    implementation(project(':starters:common'))
     // JPA
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'

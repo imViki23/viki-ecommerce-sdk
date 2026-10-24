@@ -5,13 +5,13 @@ subprojects {
 
     dependencies {
         // BOM
-        implementation platform(project(':sources:bom'))
-        compileOnly platform(project(':sources:bom'))
-        annotationProcessor platform(project(':sources:bom'))
-        testCompileOnly platform(project(':sources:bom'))
-        testAnnotationProcessor platform(project(':sources:bom'))
+        implementation platform(project(':bom'))
+        compileOnly platform(project(':bom'))
+        annotationProcessor platform(project(':bom'))
+        testCompileOnly platform(project(':bom'))
+        testAnnotationProcessor platform(project(':bom'))
         // Starters
-        implementation(project(':sources:starters:common'))
+        implementation(project(':starters:common'))
         // Web MVC
         implementation 'org.springframework.boot:spring-boot-starter-webmvc'
         // openapi

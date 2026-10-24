@@ -1,7 +1,7 @@
 opencollection: 1.0.0
 
 info:
-  name: Viki Ecommerce Sdk
+  name: viki-ecomerce-sdk-api-collections
 config:
   proxy:
     inherit: true
